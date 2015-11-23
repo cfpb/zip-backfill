@@ -10,8 +10,8 @@ The difference between the two scripts lies in how they search census block poly
 
 Benton Indiana, 10229 rows:
 
-Zip_Backfill.py ~ 1 Hour 15 Minutes
-Zip_Backfill_Fast.py ~ 30 Seconds
+- Zip_Backfill.py ~ 1 Hour 15 Minutes
+- Zip_Backfill_Fast.py ~ 30 Seconds
 
 ## Known Problems
 
