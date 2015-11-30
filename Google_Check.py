@@ -34,6 +34,7 @@ with open(args.input, 'r') as source:
 					else:
 						print 'fail'
 						fail += 1
+						print piece['long_name'] + '  ' + parts[7]
 					break
 			else:
 				print 'not_found'
