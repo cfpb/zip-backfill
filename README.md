@@ -12,3 +12,7 @@ Benton Indiana, 10229 rows:
 
 - Zip_Backfill.py ~ 1 Hour 15 Minutes
 - Zip_Backfill_Fast.py ~ 30 Seconds
+
+## Known Problems
+
+The location of the shape file is currently hard coded to /Users/gudelk/Downloads/cb_2014_us_zcta510_500k/cb_2014_us_zcta510_500k.shp'.
