@@ -15,7 +15,6 @@ Benton Indiana, 10229 rows:
 - Zip_Backfill.py ~ 1 Hour 15 Minutes
 - Zip_Backfill_Fast.py ~ 30 Seconds
 
-<<<<<<< HEAD
 ###Accuracy
 
 Running the current test of 36 rows, three rows per state for three states in each of the four OpenAddresses areas, and using Census Tiger Line ZCTA shape file:
@@ -24,8 +23,4 @@ Running the current test of 36 rows, three rows per state for three states in ea
 - 27/30 of the backfilled zip codes agree with what the Google api returns as the zip code
 
 
-=======
-## Known Problems
 
-The location of the shape file is currently hard coded to /Users/gudelk/Downloads/cb_2014_us_zcta510_500k/cb_2014_us_zcta510_500k.shp'.
->>>>>>> master
