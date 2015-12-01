@@ -17,10 +17,15 @@ Benton Indiana, 10229 rows:
 
 ###Accuracy
 
-Running the current test of 36 rows, three rows per state for three states in each of the four OpenAddresses areas, and using Census Tiger Line ZCTA shape file:
+Running the current test file of 36 rows, three rows per state for three states in each of the four OpenAddresses areas, and using Census Tiger Line ZCTA shape file:
 
 - 30/36 are found and backfilled with zip codes
 - 27/30 of the backfilled zip codes agree with what the Google api returns as the zip code
+
+1,000 rows randomly picked from all files:
+
+- 870/1000 = 87%: backfilled
+- 745/870 = 86.6%: agree with Google api
 
 
 
