@@ -13,8 +13,7 @@ url_pre = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
 url_post = '&key=' + key
 
 #check address against google api
-def check_address(row):
-	parts = row.split(',')
+def check_address(parts):
 	#construct url with lat and lon and send request
 	result = (requests.get(url_pre + parts[1] + ',' + parts[0] + url_post)).json()
 	#if google finds point
@@ -37,7 +36,8 @@ def check_address(row):
 output = open(args.output, 'w')
 with open(args.input, 'r') as source:
 	for row in source:
-		if row[0] != '#': output.write(row.strip('\n') + ',' + check_address(row) + '\n')
+		parts = row.split(',')
+		if row[0] != '#': output.write(','.join(row.strip('\n').append(check_address(parts))) + '\n')
 		else: output.write(row)
 
 output.close()
