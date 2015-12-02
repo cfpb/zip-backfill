@@ -53,8 +53,9 @@ current_inx = 0
 with open(args.input, 'r') as points:
 	for point in points:
 		s_point = point.split(',')
+		if len(s_point) == 8: s_point.append('\r\n')
 		#check for zip
-		if s_point[7]: output.write(point)
+		if len(s_point[7]) > 4 : output.write(point)
 		else:
 			#run function find_zip with lon and lat of current row as a point and the index of the last found point
 			result = find_zip(Point(float(s_point[0]), float(s_point[1])), current_inx)
