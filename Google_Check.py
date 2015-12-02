@@ -7,6 +7,7 @@ parser.add_argument('input', help = 'OpenAddresses file with backfilled zip to c
 parser.add_argument('output', help = 'file to output accuracy data')
 parser.add_argument('key', help = 'a file containing a valid google api key')
 parser.add_argument('-r', '--reverse', help = 'use a reverse geocode search', action = 'store_true')
+parser.add_argument('-zip', '--zip', help = 'search with zip code', action = 'store_true')
 args = parser.parse_args()
 
 #check address against google api
@@ -22,6 +23,13 @@ def check_address(parts, session, key):
 	url_post = '&key=' + key
 	#construct url with address and send request
 	result = (session.get(url_pre + (parts[2] + ' ' + parts[3] + ', ' + parts[4] + ', ' + parts[6]).replace(' ', '+') + url_post)).json()
+	return parse_response(result)
+
+def check_address_zip(parts, session, key):
+	url_pre = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+	url_post = '&key=' + key
+	#construct url with address and send request
+	result = (session.get(url_pre + (parts[2] + ' ' + parts[3] + ', ' + parts[4] + ', ' + parts[6] + ' ' + parts[7]).replace(' ', '+') + url_post)).json()
 	return parse_response(result)
 
 def parse_response(result):
@@ -48,9 +56,8 @@ with requests.Session() as google:
 	with open(args.input, 'r') as source:
 		for row in source:
 			parts = (row.strip('\r\n')).split(',')
-			if row[0] != '#' and args.reverse: output.write(','.join(parts + [check_address_reverse(parts, google, key)]) + '\n')
-			elif row[0] != '#': output.write(','.join(parts + [check_address(parts, google, key)]) + '\n')
-			else: output.write(row)
+			if args.reverse: output.write(','.join(parts + [check_address_reverse(parts, google, key)]) + '\n')
+			elif args.zip: output.write(','.join(parts + [check_address_zip(parts, google, key)]) + '\n')
+			else: output.write(','.join(parts + [check_address(parts, google, key)]) + '\n')
 
-output.close()
-		
+output.close()	
