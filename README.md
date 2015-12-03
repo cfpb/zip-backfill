@@ -1,6 +1,8 @@
 # Zip_Backfill
 
-Both of these scripts run from the command line and take as input two files: input and output. Input is a .csv file with addresses that need to be backfilled. This file should be in the format: Lon Lat, Number, Street, City, District, Region, Zip, ID. Output is a .csv file that the backfilled addresses will be written into. Addresses rows will be returned in the same format as Input.
+Both of the scripts labeled Zip_Backfill run from the command line and take as input two files: input and output. Input is a .csv file with addresses that need to be backfilled. This file should be in the format: Lon Lat, Number, Street, City, District, Region, Zip, ID. Output is a .csv file that the backfilled addresses will be written into. Addresses rows will be returned in the same format as Input.
+
+All other files are for testing purposes.
 
 ## Difference Between Files
 
@@ -22,7 +24,7 @@ Running the current test file of 36 rows, three rows per state for three states 
 - 30/36 are found and backfilled with zip codes
 - 27/30 of the backfilled zip codes agree with what the Google api returns as the zip code
 
-1,000 rows randomly picked from all files:
+2,000 rows randomly picked from all files:
 
 - 1,717/2,000 = 86%: backfilled
 - 1,129/1,259 = 90%: agree with Google api
