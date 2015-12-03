@@ -56,7 +56,8 @@ with requests.Session() as google:
 	with open(args.input, 'r') as source:
 		for row in source:
 			parts = (row.strip('\r\n')).split(',')
-			if args.reverse: output.write(','.join(parts + [check_address_reverse(parts, google, key)]) + '\n')
+			if parts[7] = 'None': output.write(','.join(parts + ['None']) + '\n')
+			elif args.reverse: output.write(','.join(parts + [check_address_reverse(parts, google, key)]) + '\n')
 			elif args.zip: output.write(','.join(parts + [check_address_zip(parts, google, key)]) + '\n')
 			else: output.write(','.join(parts + [check_address(parts, google, key)]) + '\n')
 

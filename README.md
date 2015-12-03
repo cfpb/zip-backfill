@@ -24,8 +24,8 @@ Running the current test file of 36 rows, three rows per state for three states 
 
 1,000 rows randomly picked from all files:
 
-- 870/1000 = 87%: backfilled
-- 745/870 = 86.6%: agree with Google api
+- 1,717/2,000 = 86%: backfilled
+- 1,129/1,259 = 90%: agree with Google api
 
 
 
