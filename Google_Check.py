@@ -7,7 +7,8 @@ parser.add_argument('input', help = 'OpenAddresses file with backfilled zip to c
 parser.add_argument('output', help = 'file to output accuracy data')
 parser.add_argument('key', help = 'a file containing a valid google api key')
 parser.add_argument('-r', '--reverse', help = 'use a reverse geocode search', action = 'store_true')
-parser.add_argument('-zip', '--zip', help = 'search with zip code', action = 'store_true')
+parser.add_argument('-z', '--zip', help = 'search with zip code', action = 'store_true')
+parser.add_argument('-m', '--mapbox', help = 'geocode from the mapbox API', action = 'store_true')
 args = parser.parse_args()
 
 #check address against google api
@@ -32,6 +33,17 @@ def check_address_zip(parts, session, key):
 	result = (session.get(url_pre + (parts[2] + ' ' + parts[3] + ', ' + parts[4] + ', ' + parts[6] + ' ' + parts[7]).replace(' ', '+') + url_post)).json()
 	return parse_response(result)
 
+def check_address_mapbox(parts, session, key):
+	url_pre = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
+	url_post = '.json?types=postcode&access_token=' + key
+	result = (session.get(url_pre + parts[0] + ',' + parts[1] + url_post)).json()
+	if result['features']:
+		if result['features'][0]['text'] == parts[7]:
+			return 'Same'
+		else:
+			return result['features'][0]['text']
+	else: return 'Not Found'
+	
 def parse_response(result):
 	#if google finds point
 	if result['status'] == 'OK':
@@ -52,11 +64,12 @@ def parse_response(result):
 
 key = open(args.key, 'r').read()
 with requests.Session() as google:
-	output = open(args.output, 'w')
+	output = open(args.output, 'a')
 	with open(args.input, 'r') as source:
 		for row in source:
 			parts = (row.strip('\r\n')).split(',')
-			if parts[7] = 'None': output.write(','.join(parts + ['None']) + '\n')
+			if parts[7] == 'None': output.write(','.join(parts + ['None']) + '\n')
+			elif args.mapbox: output.write(','.join(parts + [check_address_mapbox(parts, google, key)]) + '\n')
 			elif args.reverse: output.write(','.join(parts + [check_address_reverse(parts, google, key)]) + '\n')
 			elif args.zip: output.write(','.join(parts + [check_address_zip(parts, google, key)]) + '\n')
 			else: output.write(','.join(parts + [check_address(parts, google, key)]) + '\n')

@@ -24,10 +24,13 @@ Running the current test file of 36 rows, three rows per state for three states 
 - 30/36 are found and backfilled with zip codes
 - 27/30 of the backfilled zip codes agree with what the Google api returns as the zip code
 
-2,000 rows randomly picked from all files:
+3,000 rows randomly picked from all files:
 
-- 1,717/2,000 = 86%: backfilled
-- 1,129/1,259 = 90%: agree with Google api
+- 11,148/13,000 = 86%: backfilled
+
+- 1,608/1,750 = 92%: agree with Google api
+
+- 8587/8593 = 99% agree with Mapbox api
 
 
 
