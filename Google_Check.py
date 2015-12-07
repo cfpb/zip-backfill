@@ -1,8 +1,12 @@
+'''
+Runs through an OpenAddresses formatted file and checks the zip codes present against google or mapbox and output the rows to another file with the web API results
+'''
+
 import requests
 import argparse
 
 #command line parser
-parser = argparse.ArgumentParser(description = 'Backfills zip code to single file')
+parser = argparse.ArgumentParser(description = 'Checks an OpenAddresses formatted file against a web API')
 parser.add_argument('input', help = 'OpenAddresses file with backfilled zip to check')
 parser.add_argument('output', help = 'file to output accuracy data')
 parser.add_argument('key', help = 'a file containing a valid google api key')
