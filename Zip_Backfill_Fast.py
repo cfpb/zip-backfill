@@ -66,7 +66,3 @@ with open(args.input, 'r') as points:
 			output.write(",".join(s_point))
 
 output.close()
-
-
-
-
