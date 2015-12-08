@@ -1,3 +1,7 @@
+'''
+Takes an OpenAddresses formatted file and writes every good row without a zipcode into an output file
+'''
+
 import argparse
 import os
 

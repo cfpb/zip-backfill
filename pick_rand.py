@@ -1,3 +1,7 @@
+'''
+Pick a number of random rows from a file and place them in an output file
+'''
+
 import argparse
 import random
 from collections import deque
