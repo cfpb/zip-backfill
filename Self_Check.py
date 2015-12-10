@@ -1,10 +1,10 @@
 '''
-This code takes an OpenAddresses file with zip codes
-it then backfills each row and checks the backfill 
+This code takes a file in the format of OpenAddresses.
+However, this file must contain good rows with zip codes.
+Pull_only_zip.py is meant to produce rows for this.
+It then backfills each row and checks the backfill 
 results against the existant zip codes and produces
-a new file with the results
-
-Pull_only_zip.py is meant to produce rows for this
+a new file with those results
 '''
 
 import fiona
