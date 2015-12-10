@@ -27,18 +27,15 @@ Zip_Backfill runs from the command line and takes as input two files: input and 
 
 ##Accuracy
 
-Running the included test file of 36 rows, three rows per state for three states in each of the four OpenAddresses areas, and using the Census Tiger ZCTA .shp file:
-
-- 30/36 are found and backfilled with zip codes
-- 27/30 of the backfilled zip codes agree with what the Google api returns as the zip code
-
 Rows randomly picked from all files and using the Census Tiger ZCTA .shp file:
 
-- 11,148/13,000 = 86%: backfilled
+- 19,729/23,000 = 86%: backfilled
 
 - 1,608/1,750 = 92%: agree with Google api
 
-- 8587/8593 = 99% agree with Mapbox api
+- 8,587/8,593 = 99% agree with Mapbox api
+
+- 8,236/8,581 = 96% agree with OpenAddresses
 
 
 

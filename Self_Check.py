@@ -1,3 +1,12 @@
+'''
+This code takes an OpenAddresses file with zip codes
+it then backfills each row and checks the backfill 
+results against the existant zip codes and produces
+a new file with the results
+
+Pull_only_zip.py is meant to produce rows for this
+'''
+
 import fiona
 import argparse
 from shapely.geometry import shape
@@ -52,17 +61,19 @@ output = open(args.output, 'w')
 current_inx = 0
 with open(args.input, 'r') as points:
 	for point in points:
-		s_point = point.split(',')
-		if len(s_point) == 8: s_point.append('\r\n')
-		#check for zip
-		if len(s_point[7]) > 4 : output.write(point)
-		else:
-			#run function find_zip with lon and lat of current row as a point and the index of the last found point
-			result = find_zip(Point(float(s_point[0]), float(s_point[1])), current_inx)
-			#set current_inx to the index of the last point found
-			current_inx = result[1]
-			#zip of point is the zip of the found ZCTA
-			s_point[7] = result[0]
-			output.write(",".join(s_point) + '\n')
+		s_point = (point.strip('\r\n')).split(',')
+		if len(s_point) == 8: 
+			s_point.append('')
+		#run function find_zip with lon and lat of current row as a point and the index of the last found point
+		result = find_zip(Point(float(s_point[0]), float(s_point[1])), current_inx)
+		#set current_inx to the index of the last point found
+		current_inx = result[1]
+		#if zcta zip is same as on file
+		if result[0] == s_point[7]: s_point[8] = 'same'
+		#if no zcta zip is found
+		elif result[0] == 'None': s_point[8] = 'None'
+		#if zcta is not the same as on file write in found zip
+		else: s_point[8] = result[0]
+		output.write(",".join(s_point) + '\n')
 
 output.close()
