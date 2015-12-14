@@ -28,7 +28,7 @@ temp_rand = random.randint(1000000,9999999)
 
 print 'picks rows'
 #open temp file and write in random rows
-pick_rand.pick_rows(args.input, temp_rand, args.number)
+pick_rand.write_rows(args.input, temp_rand, args.number)
 
 print 'load poly'
 #load shape file

@@ -15,7 +15,7 @@ def choose_rows(length, number):
 	picks = random.sample(range(length), number)
 	return sorted(picks)
 
-def pick_rows(inputF, outputF, number):
+def write_rows(inputF, outputF, number):
 	picks = deque(choose_rows(file_len(inputF), number))
 	output = open(outputF, 'w')
 	current = picks.popleft()
