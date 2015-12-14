@@ -2,15 +2,8 @@
 Pick a number of random rows from a file and place them in an output file
 '''
 
-import argparse
 import random
 from collections import deque
-
-parser = argparse.ArgumentParser(description = 'picks random rows from a file')
-parser.add_argument('input', help = 'the input file')
-parser.add_argument('output', help = 'the output file')
-parser.add_argument('number', type = int, help = 'the number of rows to return')
-args = parser.parse_args()
 
 def file_len(fname):
 	with open(fname) as f:
@@ -18,16 +11,30 @@ def file_len(fname):
 			pass
 	return i + 1
 
-def pick_rows(length, number):
-	picks = random.sample([i for i in range(length)], number)
+def choose_rows(length, number):
+	picks = random.sample(range(length), number)
 	return sorted(picks)
 
-picks = deque(pick_rows(file_len(args.input), args.number))
-output = open(args.output, 'w')
-current = picks.popleft()
-with open(args.input, 'r') as f:
-	for inx, row in enumerate(f):
-		if inx == current: 
-			output.write(row)
-			if len(picks) > 0: current = picks.popleft()
-			else: break
+def write_rows(inputF, outputF, number):
+	picks = deque(choose_rows(file_len(inputF), number))
+	output = open(outputF, 'w')
+	current = picks.popleft()
+	with open(inputF, 'r') as f:
+		for inx, row in enumerate(f):
+			if inx == current: 
+				output.write(row)
+				if len(picks) > 0: current = picks.popleft()
+				else: break
+
+if __name__ == '__main__':
+	
+	import argparse
+
+	#command line parser
+	parser = argparse.ArgumentParser(description = 'picks random rows from a file')
+	parser.add_argument('input', help = 'the input file')
+	parser.add_argument('output', help = 'the output file')
+	parser.add_argument('number', type = int, help = 'the number of rows to return')
+	args = parser.parse_args()
+
+	pick_rows(args.input, args.output, args.number)
