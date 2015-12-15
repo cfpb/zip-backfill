@@ -1,28 +1,56 @@
 # Zip_Backfill
 
-The primary file is Zip_Backfill.py, all other files are to test its accuracy.
+**Description**: `Zip_Backfill.py` takes an OpenAddresses files and, for rows that do not have zip codes, compares the row's lat and lon to a shape file of zip codes in order to assign it a zip code. The code is designed to work with a Census ZCTA `.shp` file.
 
-Zip_Backfill runs from the command line and takes as input two files: input and output. Input is a .csv file with addresses that need to be backfilled. This file should be in the format: Lon, Lat, Number, Street, City, District, Region, Zip, ID. Output is a .csv file that the backfilled addresses will be written into. Address rows will be returned in the same format as they are inputted.
+All other files are to test the efficacy of `Zip_Backfill.py`.
 
-##Dependencies
+##Usage
 
-###All
+- To install dependencies run `pip install -r requirements.txt`
 
-- Python 2.7
+- Download the 2015 TIGER ZCTA `zip` [here](ftp://ftp2.census.gov/geo/tiger/TIGER2015/ZCTA5/)
 
-###Zip_Backfill.py
+- Retrieve the [OpenAddresses US regional zip files](http://results.openaddresses.io/)
 
-- Fiona (Python Library)
+- **To Backfill**
 
-- Shapely (Python Library)
+	- Pick an OpenAddresses file from one of their regional US zip files to backfill with zip codes
 
-- A census [ZCTA](https://www.census.gov/geo/reference/zctas.html) .shp file (the TIGER file can be found [here](ftp://ftp2.census.gov/geo/tiger/TIGER2015/ZCTA5/))
+	- Run `python Backfill_Zip.py <CLI Options>`
 
-###Google_Check.py
+- **To Run Tests**
 
-- Requests (Python Library)
+	- Make a file of OpenAddresses rows to test
 
-- A file with a valid Google API key or a valid Mapbox API key
+		- Run `python pick_no_zips.py <CLI Options>` (for a check against Google or Mapbox) or `python pick_only_zips.py <CLI Options>` (for a check against zip codes already in OpenAddresses)
+
+	- Run `python test.py <CLI Options>`
+
+##CLI Options
+
+- **`Backfill_Zip.py`**
+
+	- **input** OpenAddresses file to backfill from
+	- **output** file to to backfill to
+	- **shape_file** a census ZCTA shape file
+
+- **`pick_no_zips.py` and `pick_only_zips.py`**
+
+	- **input** A file containing some number of state OpenAddresses files
+	- **output** The file to store found rows
+
+- **`test.py`**
+
+	- **input** OpenAddresses file to take rows from
+	- **shape_file** a census ZCTA shape file
+	- **number** the number of rows to test
+	- **-g, --google** use google geocode search, argument: (output file)
+	- **-r, --reverse** use a reverse google geocode search, argument: (output file)
+	- **-z, --zip** search google with zip code, argument: (output file)
+	- **-m, --mapbox** reverse geocode from the mapbox API, argument: (output file)
+	- **-o, --openaddresses** check against zips in openaddresses, argument: (output file)
+	- **-gk, --google_key** a file with a google API key, needed if running any check against google
+	- **-mk, --mapbox_key** a file with a mapbox API key, needed if running a check against mapbox
 
 
 ##Accuracy
