@@ -1,15 +1,15 @@
 '''
-Takes an OpenAddresses formatted file and writes every good row with a zipcode into an output file
-this is meant to be used with Self_Check.py
+Takes an OpenAddresses formatted file and writes every good row without or with a zipcode into an output file, defaults to without a zip code
 '''
 
 import argparse
 import os
 
 #command line parser
-parser = argparse.ArgumentParser(description = 'Code that takes all good rows zip codes')
+parser = argparse.ArgumentParser(description = 'Code that takes all good rows without zip codes')
 parser.add_argument('input', help = 'A file containing some number of state OpenAddresses files')
 parser.add_argument('output', help = 'The file to store found rows')
+parser.add_argument('-z', '--zips', action = 'store_true', help = 'pull rows WITH zips, instead of without')
 args = parser.parse_args()
 
 def check_validity(l_split, row):
@@ -40,8 +40,13 @@ for state in mylistdir(args.input): #loop through states folders
 			with open(state_dir + '//' + region, 'r') as file:
 				for row in file:
 					row_split = row.split(',')
-					#check that row is good and contains a sip code
-					if check_validity(row_split, row) and  len(row_split[7]) >= 5: 
+					#if collecting rows with no zips
+					if not args.zips and check_validity(row_split, row) and  len(row_split[7]) < 5: 
+						#if no state use the abbreviation from the file name						
+						if not row_split[6]: row_split[6] = state
+						output.write(','.join(row_split))
+					#if collecting rows with zips
+					if args.zips and check_validity(row_split, row) and  len(row_split[7]) >= 5:
 						#if no state use the abbreviation from the file name
 						if not row_split[6]: row_split[6] = state
 						output.write(','.join(row_split))
