@@ -41,12 +41,12 @@ for state in mylistdir(args.input): #loop through states folders
 				for row in file:
 					row_split = row.split(',')
 					#if collecting rows with no zips
-					if not args.zips and check_validity(row_split, row) and  len(row_split[7]) < 5: 
+					if not args.zips and len(row_split[7]) < 5 and check_validity(row_split, row): 
 						#if no state use the abbreviation from the file name						
 						if not row_split[6]: row_split[6] = state
 						output.write(','.join(row_split))
 					#if collecting rows with zips
-					if args.zips and check_validity(row_split, row) and  len(row_split[7]) = 5:
+					if args.zips and len(row_split[7]) = 5 and check_validity(row_split, row):
 						#if no state use the abbreviation from the file name
 						if not row_split[6]: row_split[6] = state
 						output.write(','.join(row_split))
