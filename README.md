@@ -8,7 +8,7 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 - To install dependencies run `pip install -r requirements.txt`
 
-- Download the 2015 TIGER ZCTA `zip` [here](ftp://ftp2.census.gov/geo/tiger/TIGER2015/ZCTA5/)
+- Download the 2015 TIGER ZCTA `zip` [here](https://www.census.gov/geo/maps-data/data/tiger-line.html)
 
 - Retrieve the [OpenAddresses US regional zip files](http://results.openaddresses.io/)
 
@@ -20,9 +20,9 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 - **To Run Tests**
 
-	- Make a file of OpenAddresses rows to test
+	- Make a file of unedited OpenAddresses rows to test with either all or no zip codes
 
-		- Run `python pick_no_zips.py <CLI Options>` (for a check against Google or Mapbox) or `python pick_only_zips.py <CLI Options>` (for a check against zip codes already in OpenAddresses)
+		- To do this run `python pull_test_rows.py <CLI Options>` to pick rows without zip codes(for a check against Google or Mapbox) OR `python pull_test_rows.py <CLI Options> -z` to pick rows with zip codes(for a check against zip codes already in OpenAddresses)
 
 	- Run `python test.py <CLI Options>`
 
@@ -34,10 +34,11 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 	- **output** file to to backfill to
 	- **shape_file** a census ZCTA shape file
 
-- **`pick_no_zips.py` and `pick_only_zips.py`**
+- **`pull_test_rows`**
 
 	- **input** A file containing some number of state OpenAddresses files
 	- **output** The file to store found rows
+	- **zips** Pick only rows WITH zip codes instead of rows without zip codes
 
 - **`test.py`**
 
