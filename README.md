@@ -22,7 +22,9 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 	- Make a file of unedited OpenAddresses rows to test with either all or no zip codes
 
-		- To do this run `python pull_test_rows.py <CLI Options>` to pick rows without zip codes(for a check against Google or Mapbox) OR `python pull_test_rows.py <CLI Options> -z` to pick rows with zip codes(for a check against zip codes already in OpenAddresses)
+		- To do this run `python pull_test_rows.py <CLI Options>` to pull rows without zip codes(for a check against Google or Mapbox) 
+
+		-OR run `python pull_test_rows.py <CLI Options> -z` to pull rows with zip codes(for a check against zip codes already in OpenAddresses)
 
 	- Run `python test.py <CLI Options>`
 
@@ -38,7 +40,7 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 	- **input** A file containing some number of state OpenAddresses files
 	- **output** The file to store found rows
-	- **zips** Pick only rows WITH zip codes instead of rows without zip codes
+	- **-z, --zips** Pull only rows WITH zip codes instead of rows without zip codes
 
 - **`test.py`**
 
@@ -56,7 +58,7 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 ##Accuracy
 
-Rows randomly picked from all files and using the Census Tiger ZCTA .shp file:
+Rows randomly pulled from all files and using the Census Tiger ZCTA .shp file:
 
 - 19,729/23,000 = 86%: backfilled
 
