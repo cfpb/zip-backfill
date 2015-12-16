@@ -46,7 +46,7 @@ for state in mylistdir(args.input): #loop through states folders
 						if not row_split[6]: row_split[6] = state
 						output.write(','.join(row_split))
 					#if collecting rows with zips
-					if args.zips and check_validity(row_split, row) and  len(row_split[7]) >= 5:
+					if args.zips and check_validity(row_split, row) and  len(row_split[7]) = 5:
 						#if no state use the abbreviation from the file name
 						if not row_split[6]: row_split[6] = state
 						output.write(','.join(row_split))
