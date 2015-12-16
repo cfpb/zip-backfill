@@ -24,7 +24,7 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 		- To do this run `python pull_test_rows.py <CLI Options>` to pull rows without zip codes(for a check against Google or Mapbox) 
 
-		-OR run `python pull_test_rows.py <CLI Options> -z` to pull rows with zip codes(for a check against zip codes already in OpenAddresses)
+		- OR run `python pull_test_rows.py <CLI Options> -z` to pull rows with zip codes(for a check against zip codes already in OpenAddresses)
 
 	- Run `python test.py <CLI Options>`
 
