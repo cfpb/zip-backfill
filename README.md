@@ -4,7 +4,7 @@
 
 All other files are to test the efficacy of `Zip_Backfill.py`.
 
-##Usage
+## Usage
 
 - To install dependencies run `pip install -r requirements.txt`
 
@@ -28,7 +28,7 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 
 	- Run `python test.py <CLI Options>`
 
-##CLI Options
+## CLI Options
 
 - **`Backfill_Zip.py`**
 
@@ -56,7 +56,7 @@ All other files are to test the efficacy of `Zip_Backfill.py`.
 	- **-mk, --mapbox_key** a file with a mapbox API key, needed if running a check against mapbox
 
 
-##Accuracy
+## Accuracy
 
 Rows randomly pulled from all files and using the Census Tiger ZCTA .shp file:
 
